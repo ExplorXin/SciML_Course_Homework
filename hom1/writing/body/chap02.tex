@@ -1,0 +1,76 @@
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
+\chapter{实验原理与模型构建}
+\label{cha:command}
+
+\section{实验原理}
+\subsection{前馈神经网络}
+深度神经网络是一种多层前馈神经网络，其基本结构包括输入层、隐藏层和输出层，每一层的计算形式为
+\begin{equation*}
+    y_{k+1}=\sigma(w^T x_k+b),
+\end{equation*}
+其中$w$为权重矩阵，$b$为偏执，$\sigma$为激活函数.
+
+\subsection{激活函数}
+激活函数用于引入非线性能力. 本实验研究三种常见激活函数：ReLU、tanh与sigmoid
+
+\subsection{损失函数}
+本实验使用均方误差（MSE）：
+\begin{equation*}
+    \mathbf{MSE} = \frac{1}{n}\sum_{i=1}^n(y_i-\hat{y_i})^2,
+\end{equation*}
+并计算平均绝对误差(MAE)：
+\begin{equation*}
+    \mathbf{MAE} = \frac{1}{n}\sum_{i=1}^N\left | y_i-\hat{y_i}\right |.
+\end{equation*}
+
+\subsection{优化算法}
+本实验使用Adam优化器
+
+
+
+\section{模型构建}
+\subsection{实验环境与版本配置}
+实验环境如下
+\begin{table}[htbp]
+  \centering
+  \caption{表格示例}
+    \begin{tabular}{ccccc}
+    \toprule
+    项目 & 配置 \\
+    \midrule
+    Python版本  & 3.14.0 \\
+    深度学习框架  & PyTorch \\
+    numpy  & 2.4.3 \\
+    pandas  & 2.3.3 \\
+    scipy & 1.17.1 \\
+    matplotlib & 3.10.8 \\
+    \bottomrule
+    \end{tabular}%
+  \label{Tab4-1}%
+\end{table}%
+
+\subsection{模型配置}
+本实验默认配置如下表：
+\begin{table}[htbp]
+  \centering
+  \caption{模型默认参数}
+    \begin{tabular}{ccccc}
+    \toprule
+    项目 & 配置 \\
+    \midrule
+      网络结构 & [1,50,50,1] \\
+      激活函数 & tanh \\
+      训练回合数 & 30000 \\
+      总样本点数 & 151 \\
+      训练点数 & 75 \\
+    \bottomrule
+    \end{tabular}%
+  \label{Tab4-1}%
+\end{table}%
+
+根据实验内容，变更相应实验参数，其余保持不变

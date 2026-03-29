@@ -2,8 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+## ----构建FNN网络----
 class FNN(nn.Module):
-    def __init__(self, layers, actn = 'relu'):
+    def __init__(self, layers, actn = 'tanh'):
         super().__init__()
         L = len(layers)
 
@@ -25,4 +26,3 @@ class FNN(nn.Module):
             x = self.activation(linear(x))
         x = self.linear[-1](x)
         return x
-

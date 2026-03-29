@@ -11,7 +11,10 @@ import matplotlib.pyplot as plt
 torch.manual_seed(1234)
 np.random.seed(1234)
 
-from hom1.net import FNN
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
+from Hom1.ReferenceCode.net import FNN
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print('running on: %s'%(device))
