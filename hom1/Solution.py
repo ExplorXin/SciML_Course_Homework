@@ -33,13 +33,14 @@ for n in sample_sizes:
     
     plt.ion()
     model.plot_curve(x_test_q1, y_true_q1, y_pred_q1,f"sample size = {n}")
+    model.plot_loss_100(loss_q1, str(n)+' samples')
     plt.pause(0.01)
     
 # 比较MSE/MAE/损失曲线
 df_q1=pd.DataFrame(results_q1,columns=['Sample_Sizes','MSE','MAE'])
 print(df_q1)
 
-model.plot_loss(loss_dict_q1, title='Loss Comparison (Different Sample Sizes)')
+# model.plot_loss(loss_dict_q1, title='Loss Comparison (Different Sample Sizes)')
 
 
 
@@ -74,13 +75,14 @@ for s in hide_layers:
 
     plt.ion()
     model.plot_curve(x_test_q2, y_true_q2, y_pred_q2, str(s))
+    model.plot_loss_100(loss_q2, str(s))
     plt.pause(0.01)
 
 # 比较MSE/MAE/损失曲线/训练时间
 df_q2=pd.DataFrame(results_q2,columns=['Hide_Layers','MSE','MAE','Train_time'])
 print(df_q2)
 
-model.plot_loss(loss_dict_q2, title='Loss Comparison (Different Network Structures)')
+# model.plot_loss(loss_dict_q2, title='Loss Comparison (Different Network Structures)')
 
 model.plot_train_time(hide_layers, time_list_q2, xlabel="Network Structure")
 
@@ -116,6 +118,7 @@ for act in activations:
 
     plt.ion()
     model.plot_curve(x_test_q3, y_true_q3, y_pred_q3, act)
+    model.plot_loss_100(loss_q3, act)
     plt.pause(0.01)
 
 # 比较MSE/MAE/损失曲线/训练时间
@@ -124,7 +127,7 @@ print(df_q3)
 
 model.plot_train_time(activations, time_list_q3,xlabel="Activation Functions")
 
-model.plot_loss(loss_dict_q3, title='Loss Comparison (Different Activation Functions)')
+# model.plot_loss(loss_dict_q3, title='Loss Comparison (Different Activation Functions)')
 
 plt.ioff()
 plt.show()

@@ -38,6 +38,7 @@ for s in hide_layers:
 
     plt.ion()
     model.plot_curve(x_test_q2, y_true_q2, y_pred_q2, str(s))
+    model.plot_loss_100(loss_q2, str(s))
     plt.pause(0.01)
 
 # 比较MSE/MAE/损失曲线/训练时间
@@ -45,7 +46,7 @@ df_q2=pd.DataFrame(results_q2,columns=['Hide_Layers','MSE','MAE','Train_time'])
 print(df_q2)
 
 
-model.plot_loss(loss_dict_q2, title='Loss Comparison (Different Network Structures)')
+# model.plot_loss(loss_dict_q2, title='Loss Comparison (Different Network Structures)')
 
 model.plot_train_time(hide_layers, time_list_q2, xlabel="Network Structure")
 

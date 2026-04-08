@@ -32,14 +32,14 @@ for n in sample_sizes:
     
     plt.ion()
     model.plot_curve(x_test_q1, y_true_q1, y_pred_q1,f"sample size = {n}")
+    model.plot_loss_100(loss_q1, str(n)+' samples')
     plt.pause(0.01)
     
 # 比较MSE/MAE/损失曲线
 df_q1=pd.DataFrame(results_q1,columns=['Sample_Sizes','MSE','MAE'])
 print(df_q1)
 
-
-model.plot_loss(loss_dict_q1, title='Loss Comparison (Different Sample Sizes)')
+# model.plot_loss(loss_dict_q1, title='Loss Comparison (Different Sample Sizes)')
 
 plt.ioff()     # 关闭交互模式
 plt.show()     # 阻塞显示，窗口不会自动关闭

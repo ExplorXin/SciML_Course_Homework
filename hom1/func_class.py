@@ -31,12 +31,14 @@ def target_func(x):
 
 class Hom1Model:
     def __init__(self):
-        self.default_epochs = 10000
+        self.default_epochs = 30000
         self.default_n = np.array([i for i in range(0, 
                     self.default_epochs+1, 1000)])
+        self.default_100n = np.array([i for i in range(0, 
+                    self.default_epochs+1, 100)])
 
     # 生成数据
-    def generate_data(self, num_train=75):
+    def generate_data(self, num_train=50):
         num_test = 151
         x = np.linspace(-1, 1, num_test).reshape((-1, 1))
         y = target_func(x)
@@ -46,7 +48,7 @@ class Hom1Model:
         return x_train, y_train, x, y
     
     # 模型训练
-    def train_model(self, x_train, y_train, layers=[1, 50, 50, 1], actn='tanh', epochs=10000):
+    def train_model(self, x_train, y_train, layers=[1, 20, 20, 1], actn='tanh', epochs=30000):
         model = FNN(layers, actn)
         model = model.to(device)
         
@@ -69,7 +71,10 @@ class Hom1Model:
             opt.zero_grad()
             loss.backward()
             opt.step()
-            loss_history.append(loss.item())
+            # loss_history.append(loss.item())
+
+            if epoch%100 == 0:
+                loss_history.append(loss.item())
             
             if epoch % 1000 == 0:
                 print('Steps: %d, loss: %.3e'%(epoch, loss.item()))
@@ -119,6 +124,28 @@ class Hom1Model:
         plt.title(title)
         plt.legend()
         plt.show()
+
+    def plot_loss_100(self, loss, key):
+        fig, ax = plt.subplots(figsize=(6,4))
+        ax.plot(self.default_100n, loss, label=key)
+
+        ax.set_yscale('log')
+        ax.yaxis.set_major_locator(ticker.LogLocator(base=10))
+        ax.yaxis.set_minor_locator(ticker.NullLocator())
+
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(10000))
+        ax.xaxis.set_minor_locator(ticker.MultipleLocator(5000))
+
+        formatter = ticker.ScalarFormatter(useMathText=True)
+        formatter.set_powerlimits((4,4))
+        ax.xaxis.set_major_formatter(formatter)
+
+        plt.xlabel('Step')
+        plt.ylabel('Loss')
+        plt.grid(ls='-', alpha=0.15)
+        # plt.title(title)
+        plt.legend()
+        plt.show()
     
 
     # 真实-预测曲线
@@ -158,7 +185,7 @@ class Hom1Model:
 if __name__ == "__main__":
     model_wrapper = Hom1Model()
     
-    num_train = 75
+    num_train = 50
     x_train, y_train, x_ref, y_ref = model_wrapper.generate_data(num_train)
     
     plt.figure()
@@ -167,9 +194,9 @@ if __name__ == "__main__":
     plt.legend()
     plt.show()
     
-    layers = [1] + [50]*2 + [1]
+    layers = [1] + [20]*2 + [1]
     actn = 'tanh'
-    epochs = 10000
+    epochs = 30000
     
     model, loss, partial_loss, train_time = model_wrapper.train_model(x_train, y_train, layers, actn, epochs)
     

@@ -1,5 +1,9 @@
 #我的文件
-Hom1/writing/
+writing/
+commit/
+.claude/
+.opencode/
+
 
 # ---------------------------------------------------------
 # 1. Python 编译产物 (Bytecode)
