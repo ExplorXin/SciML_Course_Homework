@@ -1,8 +1,9 @@
-import os
 import numpy as np
 import scipy.io as io
+import os
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
+data_path = os.path.join(base_dir, 'Data', 'VIV_Training')
 
 class TrainData:
     def __init__(self, t_range, NT_train, N_train):
@@ -11,8 +12,7 @@ class TrainData:
         self.N_train = N_train
 
     def build_data(self):
-        
-        data_path = os.path.join(base_dir, 'Data', 'VIV_Training.mat')
+        # data = io.loadmat('./Data/VIV_Training')
         data = io.loadmat(data_path)
         t, u, f = data['t'], data['eta_y'], data['f_y']
 

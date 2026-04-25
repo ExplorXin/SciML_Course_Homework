@@ -13,8 +13,11 @@ import matplotlib.pyplot as plt
 torch.manual_seed(1234)
 np.random.seed(1234)
 
-from net import FNN
-from dataset import TrainData
+base_dir = os.path.dirname(os.path.abspath(__file__))
+output_path = os.path.join(base_dir, 'Output', 'VIV_Pred.mat')
+
+from PINN_Inverse.torch_viv.net import FNN
+from PINN_Inverse.torch_viv.dataset import TrainData
 
 layers = [1] + [32]*2 + [1]
 
@@ -92,7 +95,8 @@ def main():
     '''
     save_dict = {'t_u_train': t_u, 'u_train': u_data, 't_f_train': t_f, 'f_train': f_data, \
                  't_test': t_test, 'u_test': u_test, 'f_test': f_test, 'k1': k1_, 'k2': k2_}
-    io.savemat('./Output/VIV_Pred.mat', save_dict)
+    # io.savemat('./Output/VIV_Pred.mat', save_dict)
+    io.savemat(output_path, save_dict)
     '''
 
 
